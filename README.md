@@ -1,16 +1,59 @@
-# React + Vite
+# 📚 Book Vibe — Book Review & Reading List Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Book Vibe Banner](https://i.ibb.co/SDhzwcTY/Screenshot-934.png)
 
-Currently, two official plugins are available:
+## 📖 Project Overview
+**Book Vibe** is a modern, interactive book discovery and reading list management web application built with React. Users can explore curated books, inspect detailed reviews, tags, and ratings, organize books into "Read" and "Wishlist" collections, sort books dynamically by rating or page count, and visualize reading statistics through custom charts.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🔗 **Live Demo:** [Visit Book Vibe](https://react-book-vibe.vercel.app/)  
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Main Technologies Used
 
-## Expanding the ESLint configuration
+| Layer | Technologies |
+| :--- | :--- |
+| **Frontend Library** | React.js |
+| **Routing** | React Router DOM |
+| **Styling & UI** | Tailwind CSS, DaisyUI |
+| **Data Visualization** | Recharts |
+| **State & Storage** | Browser LocalStorage API |
+| **Notifications** | React Toastify |
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 💡 Why These Technologies Were Chosen
+- **React.js & React Router DOM:** Enables fast single-page application (SPA) navigation with dynamic route parameters (`/book/:bookId`) and clean nested layouts.
+- **Tailwind CSS & DaisyUI:** Accelerates responsive UI development with clean typography, card layouts, and tab components.
+- **Recharts:** Used to build a custom-shaped bar chart on the "Pages to Read" page for clear visual comparison of book lengths.
+- **LocalStorage API:** Persists users' "Read Books" and "Wishlist" selections across browser reloads without requiring a backend database.
+
+---
+
+## ✨ Key Features
+- 📖 **Curated Book Catalog & Details:** Browse books with cover images, author details, categories, tags, and comprehensive reviews on dedicated detail pages.
+- 🔖 **Read List & Wishlist Management:** Add books to either the **Read** list or **Wishlist** with duplicate-entry validation and instant toast notifications.
+- 🔄 **Smart Business Logic:** Automatically prevents adding an already-read book back into the Wishlist, while allowing Wishlist books to be moved to the Read list.
+- 🔃 **Dynamic Sorting & Filtering:** Sort listed books in descending order by **Rating**, **Number of Pages**, or **Published Year**.
+- 📊 **Interactive Reading Chart:** Visualizes all books in the user's Read list using a custom Recharts bar chart comparing total page counts.
+- 📱 **Fully Responsive Design:** Seamlessly adapts to mobile, tablet, and desktop viewports.
+
+---
+
+## 📦 Key Dependencies
+- `react` & `react-dom` — Core UI library
+- `react-router-dom` — Client-side routing and dynamic URL parameters
+- `recharts` — Composable charting library for visualizing reading data
+- `react-toastify` — Clean toast alerts for user actions
+- `react-icons` — Scalable vector icons for ratings, tags, and metadata
+- `tailwindcss` & `daisyui` — Utility-first CSS styling and UI components
+
+---
+
+## 🧩 Challenges Faced & Solutions
+
+1. **Synchronizing State Between Read List and Wishlist in LocalStorage:**
+   - *Challenge:* Users could accidentally add the same book to both lists or re-add a finished book to the Wishlist, causing inconsistent UI states.
+   - *Solution:* Created a dedicated LocalStorage utility module with validation checks that verify existing IDs before saving and trigger informative toast warnings whenever a rule is violated.
+
+2. **Custom Shape Bar Chart Rendering in Recharts:**
+   - *Challenge:* Rendering a custom triangular/curved bar path dynamically based on varying book page counts while keeping the chart responsive on mobile screens.
+   - *Solution:* Wrapped the `BarChart` inside Recharts' `ResponsiveContainer` and wrote a custom SVG path generator function (`getPath`) mapped to dynamic `x`, `y`, `width`, and `height` props.
